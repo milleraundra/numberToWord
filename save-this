@@ -1,0 +1,17 @@
+22
+twenty-two
+$singledigits = array([0]=>"zero", [1]="one", [2]=>"two");
+$doubledigitis = array([2] =>"twenty", [3] =>"thirty")
+$tripledigits = array([1]=> "one hundred", [2]=>"two hundred")
+
+8392
+
+array(2,9,3,8)
+    when i=0
+    $singleDigits(array[0])
+    when i=1
+    $doubledigts (arru 1)
+    when i =3
+
+single digth - doubles =
+appends "thousand"
