@@ -36,12 +36,16 @@ class NumberToWord
 
         $result = '';
         $tens = floor($input_number / 10) * 10;
-        $hundreds = floor($input_number % 100);
+        $hundreds = $input_number % 100;
+        $thousands = $input_number % 1000;
         $hundredTens = floor($hundreds / 10) * 10;
         $units = $input_number % 10;
         $hundredUnits = ($input_number % 100) % 10;
+        $thousandUnits = ($input_number % 1000) % 10;
+        $thousandTensUnits = floor(($input_number / 100) / 10) * 10;
         $hundredPrefix = floor($input_number / 100);
         $thousandPrefix = floor($input_number / 1000);
+        $thousandHundredPrefix = floor(($input_number % 1000)/ 100);
 
 
         if ($input_number < 21) {
@@ -58,20 +62,15 @@ class NumberToWord
         } elseif ($input_number > 100 && $input_number < 1000 && $hundreds) {
             $result = $single_digits[$hundredPrefix] . ' hundred' . ' ' .  $single_digits[$hundredTens] . '-' . $single_digits[$hundredUnits];
 
-
-
-
         } elseif ($input_number > 100 && $input_number < 1000) {
             $result = $hundredPrefix . ' hundred';
 
+        } elseif ($input_number > 999 && $input_number < 10000 && $thousandUnits && $thousands){
+            $result = $single_digits[$thousandPrefix] . ' thousand ' . $single_digits[$thousandHundredPrefix] . ' hundred' . ' ' .  $single_digits[$thousandTensUnits] . '-' . $single_digits[$hundredUnits];
+
+        } elseif ($input_number > 999 && $input_number < 10000){
+            $result = $single_digits[$thousandPrefix] . ' thousand';
         }
-        // elseif ($input_number > 999 && $input_number < 10000){
-        //     $result = $single_digits[$thousandUnits] . ' thousand';
-        //
-        // } elseif ($input_number > 999 && $input_number < 10000 && $thousandUnits || $tens){
-        //     $result = $single_digits[$thousandUnits] . ' thousand' . $single_digits[$units] . ' hundred' . $single_digits[$units];
-        //
-        // }
         return $result;
     }
 }

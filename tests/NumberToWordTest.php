@@ -69,18 +69,18 @@
             $this->assertEquals("nine hundred fifteen", $result);
         }
 
-        // function test_lowFourDigit()
-        // {
-        //     //Arrange
-        //     $test_NumberToWord = new NumberToWord;
-        //     $input_number = 3500;
-        //
-        //     //Act
-        //     $result = $test_NumberToWord->wordCalculator($input_number);
-        //
-        //     //Assert
-        //     $this->assertEquals("three thousand five hundred", $result);
-        // }
+        function test_lowFourDigit()
+        {
+            //Arrange
+            $test_NumberToWord = new NumberToWord;
+            $input_number = 3532;
+
+            //Act
+            $result = $test_NumberToWord->wordCalculator($input_number);
+
+            //Assert
+            $this->assertEquals("three thousand five hundred thirty-two", $result);
+        }
 
 
     }
