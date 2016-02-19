@@ -36,10 +36,13 @@ class NumberToWord
 
         $result = '';
         $tens = floor($input_number / 10) * 10;
+        $hundreds = floor($input_number % 100);
+        $hundredTens = floor($hundreds / 10) * 10;
         $units = $input_number % 10;
-        $hundredUnits = $input_number % 100;
-        $thousandUnits = floor($input_number / 1000);
-        $hundreds = floor($input_number / 100) * 100;
+        $hundredUnits = ($input_number % 100) % 10;
+        $hundredPrefix = floor($input_number / 100);
+        $thousandPrefix = floor($input_number / 1000);
+
 
         if ($input_number < 21) {
             $result = $single_digits[$input_number];
@@ -49,20 +52,26 @@ class NumberToWord
         } elseif ($input_number < 100) {
             $result = $single_digits[$tens];
 
-        } elseif ($input_number > 100 && $input_number < 1000 && $hundredUnits) {
-            $result = $single_digits[$hundredUnits] . ' hundred' . ' ' .  $single_digits[$tens] . $single_digits[$units];
-            echo $result;
+        } elseif ($input_number > 100 && $input_number < 1000 && $hundreds > 10 && $hundreds < 20) {
+            $result = $single_digits[$hundredPrefix] . ' hundred' . ' ' .  $single_digits[$hundreds];
+
+        } elseif ($input_number > 100 && $input_number < 1000 && $hundreds) {
+            $result = $single_digits[$hundredPrefix] . ' hundred' . ' ' .  $single_digits[$hundredTens] . '-' . $single_digits[$hundredUnits];
+
+
+
 
         } elseif ($input_number > 100 && $input_number < 1000) {
-            $result = $single_digits[$hundredUnits] . ' hundred';
-
-        } elseif ($input_number > 999 && $input_number < 10000){
-            $result = $single_digits[$thousandUnits] . ' thousand';
-
-        } elseif ($input_number > 999 && $input_number < 10000 && $thousandUnits || $tens){
-            $result = $single_digits[$thousandUnits] . ' thousand' . $single_digits[$units] . ' hundred' . $single_digits[$units];
+            $result = $hundredPrefix . ' hundred';
 
         }
+        // elseif ($input_number > 999 && $input_number < 10000){
+        //     $result = $single_digits[$thousandUnits] . ' thousand';
+        //
+        // } elseif ($input_number > 999 && $input_number < 10000 && $thousandUnits || $tens){
+        //     $result = $single_digits[$thousandUnits] . ' thousand' . $single_digits[$units] . ' hundred' . $single_digits[$units];
+        //
+        // }
         return $result;
     }
 }

@@ -56,6 +56,19 @@
             $this->assertEquals("nine hundred thirty-five", $result);
         }
 
+        function test_teen_TripleDigit()
+        {
+            //Arrange
+            $test_NumberToWord = new NumberToWord;
+            $input_number = 915;
+
+            //Act
+            $result = $test_NumberToWord->wordCalculator($input_number);
+
+            //Assert
+            $this->assertEquals("nine hundred fifteen", $result);
+        }
+
         // function test_lowFourDigit()
         // {
         //     //Arrange
